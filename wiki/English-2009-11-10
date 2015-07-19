@@ -1,0 +1,24 @@
+! Word
+: errand [n]:
+:: a small task that requires a short travel
+: run an errand [v]:
+:: to do an errandd or a small task
+
+!! Job
+: techer:
+:: prepare and teach lessons assign grades
+:: participate in student's activities
+: construction worker:
+:: build buildings, repaire things
+: car dealer:
+:: sells car, give product details to customers
+: cook :
+:: cook/prepare dishes, clean the kitchen
+: secretary:
+:: take phone calls, arrange schedules
+: System Enginieer:
+:: examine new devices, solve network problems
+: delivery person:
+:: bring goods to customers, receive good, drivea truck/van
+: TV Reporter:
+:: interview people, report current situations

@@ -1,0 +1,81 @@
+! LDAPって?
+Lightweight Derectory Access Protocol
+ディレクトリサービスにアクセスするためのプロトコル
+
+* Active Directory
+* Open LDAP
+
+! ディレクトリサービス
+* ユーザ情報やマシン名などの情報を管理するためのサービス
+* 階層型のDB
+
+ uid=suzuki,ou=People,dc=intra
+
+! LDAPを使うと何がうれしいの?
+* マシン情報やユーザ情報を一元管理できる。
+** サーバごとにいちいち追加変更しなくてもすむ。
+
+! LDIF
+* LDAP Data Interchange Format
+* LDIFファイルを使ってLDAPにデータをインポートできる
+
+ sudo slapcat
+でLDAPサーバに入っているLDIFを見れるよ。
+
+! DN
+* Distinguish Name 識別名
+
+ uid=suzuki,ou=People,dc=intra
+
+! LDAPサーバのインストール
+ sudo aptitude install slapd
+
+* SEE ALSO
+** http://d.hatena.ne.jp/masasuz/20101002/1285909096
+
+! 既存のUnixアカウントのマイグレーション
+ sudo aptitude install migrationtools
+
+ cd /usr/share/migrationtools/
+ sudo vim migrate_common.ph
+
+
+ # Default DNS domain
+ $DEFAULT_MAIL_DOMAIN = "mfac.jp";
+ # Default base
+ $DEFAULT_BASE = "dc=intra";
+
+
+ ./migrate_paswd.pl /etc/paswd ~/paswd.ldif
+ ./migrate_group.pl /etc/group ~/group.ldif
+ ./migrate_hosts.pl /etc/hosts ~/hosts.ldif
+
+ cd ~/
+ ldapadd -x -h localhost -D "cn=admin,dc=intra" -f base.ldif -W
+ ldapadd -x -h localhost -D "cn=admin,dc=intra" -f passwd ldif -W
+ ldapadd -x -h localhost -D "cn=admin,dc=intra" -f group.ldif -W
+ ldapadd -x -h localhost -D "cn=admin,dc=intra" -f hosts.ldif -W
+
+! LinuxのLDAP認証
+ sudo aptitude install libnss-ldap
+ sudo vim /etc/libnss-ldap.conf
+ sudo vim /etc/nsswitch.conf
+
+うまくいかないときは、
+ sudo /etc/init.d/nscd stop
+
+* SEE ALSO
+** http://d.hatena.ne.jp/masasuz/20100923/1285237553
+
+! LDAP ブラウザ
+* Apache Directory Studio
+** http://directory.apache.org/
+
+! SSH鍵認証との連携
+やってない
+* OpenSSHにパッチを当てないといけない。
+* 公開鍵用のスキーマを登録しないといけない。
+
+! SEE ALSO
+ghyo.jpの記事が詳しいよ
+* http://gihyo.jp/admin/serial/01/ldap

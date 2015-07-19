@@ -1,0 +1,63 @@
+! BGP経路優先順位
+# ネクストホップへのIGPルートを持っていない経路は無視されます。  
+# weightパラメータを持つルータはweightパラメータ値が最大の経路を選択します。  
+# LOCAL_PREF属性の値の最も高い経路を選択します。  
+# AS_PATH属性のリストの長さが最も短い経路を選択します。  
+# ORIGIN属性のタイプが最も低い経路を選択します。（IGP<EGP<INCOMPLETEの順）  
+# ルートが同じASから取得し、複数存在する時にはMULTI_EXIT_DISC属性の低い経路を優先します。  
+# iBGPよりもeBGPで取得した経路を優先します。
+** 自身のAS番号と違うAS番号であってもConfederationPeerの場合、iBGPと同様に判断されます。
+*** http://www.cisco.com/en/US/docs/ios_xr_sw/iosxr_r3.7/routing/configuration/guide/rc37bgp.html#wpmkr1223465
+# ネクストホップへIGPで最も近い経路を優先します。  
+# ルータIDが最も低いピアから学習した経路を優先します。（ルータIDは通常、ルータのインタフェースから自動的に生成されます）
+
+!! 参考リンク
+* http://www.nic.ad.jp/ja/newsletter/No35/0800.html
+* http://www.atmarkit.co.jp/fnetwork/rensai/iprt02/iprt01.html
+* http://atnetwork.info/ccnp1/bgp14.html
+
+
+----
+
+! JunOS特有のBGPの挙動
+
+!! JunOSのデフォルトポリシー
+* 送信可能
+** eBGPピアから受信した経路をiBGPピアへ送信
+** eBGPピアから受信した経路をeBGPピアへ送信
+** iBGPピアから受信した経路をeBGPピアへ送信
+* 送信不可
+** iBGPピアから受信した経路をiBGPピアへ送信
+
+!! BGPネクストホップ解決
+eBGPピアから広告された経路情報のネクストホップは通常そのeBGPピアノ物理I/FのIPアドレスとなっております。さらにこの経路情報を自AS内のiBGPピアに広告するときもネクストホップ情報は変更されません。自AS内のルータが他ASのeBGPピアの物理I/FのIPアドレスの経路情報を持っていない場合、到達不能となります。
+
+!!! 解決策
+
+!!!! next-hop self
+eBGPから広告された経路情報を自AS内のiBGPピアに広告するとき自身のIPアドレスに変更する機能。
+
+ policy-options {
+     policy-statement next-hop-self {
+         term 1 {
+             then next-hop self;
+         }
+     }
+ }
+ protocols {
+     bgp {
+         export next-hop-self;
+         local-address 10.10.10.10;
+         perr-as 65000;
+         neighbor 10.10.10.20;
+         neighbor 20.10.10.20;
+         }
+     }
+ }
+
+!!!! Passive Interface
+eBGPルータ間のネットワークをIGPで広告します。つまりeBGP間のリンクは両端のI/FでIGPをPassiveInterfaceに設定します。
+
+
+!! 参考資料
+* 『はじめてのJUNOS』

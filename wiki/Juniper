@@ -1,0 +1,25 @@
+! 目次
+{{toc_here}}
+
+! BGP
+!! Policy
+!!! Policy Action Conversion Values
+||! Policy Action ||! Conversion Value ||! Flow Control Acton Conversion Value ||
+|| Accept || TRUE || Accept ||
+|| Refect || FALSE || Refect ||
+|| Next policy || TRUE || Next policy ||
+
+!!! Policy Expression Example
+次の例は、ポリシーエクスプレッションを作るための論理演算子の使い方について記述しています。
+
+* 論理和 - 次の例では、policy１が最初に評価され、policy1評価後、Trueが返る場合、policy2が評価されます。Falseが返る場合、Policy2は評価されません。
+ export (policy1 && policy2)
+
+* 出典
+** PP 61 https://www.juniper.net/techpubs/software/junos/junos93/swconfig-policy/swconfig-policy.pdf
+
+
+
+
+
+{{toc_here}}

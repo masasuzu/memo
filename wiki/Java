@@ -1,0 +1,71 @@
+{{toc_here}}
+
+
+! イニシャライザ
+!! スタティックイニシャライザ
+クラスが最初に使われたときに実行する。
+
+     static {
+         // スタティックイニシャライザ実行
+     }
+
+!! インスタンスイニシャライザ
+コンストラクタが実行される直前に実行する。
+
+複数のコンストラクタが存在する場合に便利。
+
+     {
+         // インスタンスイニシャライザ実行
+     }
+
+! クラスの拡張
+!! クラスの継承
+
+ class <サブクラス名> extends <スーパークラス名> {
+ }
+
+!! オーバーライド
+アノテーションを使用し、スーパークラスに定義されていない場合、コンパイルに失敗する。
+
+     @override
+     public void overridingMethod() {
+         //
+     }
+
+
+!! オブジェクトクラス
+
+!!! 主なメソッド
+||! アクセス修飾子 ||! 戻り値 ||! メソッド      ||! 概要                          ||
+|| public          || String  || toString()     || オブジェクトの文字列表現を返す ||
+|| public          || boolean || equals(Object) || 等値かどうかを判定             ||
+|| public          || int     || hashCode()     || ハッシュコード値を返す         ||
+|| protected       || Object  || clone()        || オブジェクトのコピーを返す     ||
+|| protected       || void    || finalize()     || ガページコレクタによって呼び出される ||
+
+!! デフォルトコンストラクタ
+コンストラクタが定義されなかった場合に呼び出される。
+ public Class() {
+     super(); //スーパークラスのコンストラクタを呼び出す。
+ }
+
+! 外部プログラムを実行
+
+!! サンプルコード
+下記のコードではdirコマンドを実行してその結果をプリントしています。
+
+ #!java
+         String result;
+         try {
+             Runtime           runtime        = Runtime.getRuntime();
+             Process           process        = runtime.exec("CMD.EXE /C DIR c:\\windows\\");
+             InputStream       inputStream    = process.getInputStream();
+             InputStreamReader inputReader    = new InputStreamReader(inputStream);
+             BufferedReader    bufferedReader = new BufferedReader(inputReader);
+ 
+             while ((result = bufferedReader.readLine()) != null) {
+                 System.out.println(result);
+             }
+         } catch (Exception e) {
+             // TODO: handle exception
+         }

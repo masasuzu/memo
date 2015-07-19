@@ -1,0 +1,36 @@
+! マルチレイヤースイッチング
+
+: CAMテーブル:
+:: 2進数
+:: 完全一致
+:: MACアドレス
+
+: TCAMテーブル:
+:: ワイルドカードが使用可能
+:: IPルーティングテーブル
+:: ACL
+
+!! SVI
+* SVIはデフォルトでVLAN1が作成されている
+* SVIはVLANのデフォルトゲートウェイになり得る
+* SVIはIPアドレスを設定して使用する
+
+!! CEF
+ CatA#show ip cef 192.168.4.0
+ 192.168.4.0/24
+   nexthop 192.168.3.3 Vlan3 
+ 
+ CatA#show adjacency detail 
+ Protocol Interface                 Address
+ IP       Vlan3                     192.168.3.3(9)
+                                    0 packets, 0 bytes
+                                    epoch 0
+                                    sourced in sev-epoch 5
+                                    Encap length 14
+                                    00107B3BBB28000AF468C3800800
+                                    ARP
+
+* 00107B3BBB28000AF468C3800800
+** 前半12桁(00107B3BBB28)はあて先MACアドレス
+** 次の12桁(000AF468C380)は送信元のMACアドレス
+** 最後の4桁(0800)がプロトコル

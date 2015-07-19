@@ -1,0 +1,74 @@
+! BSCI-Redistribution
+
+{{toc_here}}
+
+!! 再配送
+!!! シードメトリック
+||! ルーティングプロトコル || シードメトリック        ||
+|| RIP                     || 無限大                  ||
+|| EIGRP                   || 無限大                  ||
+|| OSPF                    || 20 (BGPからの再配送は1) ||
+|| IS-IS                   || 0                       ||
+|| BGP                     || IGPメトリックそのまま   ||
+
+!!! シードメトリックの設定
+ (config-router)# default-metric <metric>
+
+ (config-router)# redistribution <protocol> [metric <metric>]
+
+!!! OSPFへの再配送
+* デフォルトのメトリックタイプ
+** タイプ2
+
+!!! EIGRPへの再配布
+ 
+ (config-router)# redistribution <protocol> <bw(Kbps)> <dly(10μs)> <rely> <load> <mtu>
+
+!!! IS-ISへの再配送
+* レベルの指定がない場合、レベル2として処理される
+
+!!! ルートフィルタリング
+* 配送リストにアクセスリストを組み合わせることでルーティングアップデートを制御することができる
+* 配送リストを使用すると特定の経路情報のみ受信/送信することができる
+
+!!!! 入力フィルタリング
+ (config-router)# destribute-list <acl> in [<interface>]
+
+!!!! 出力フィルタリング
+ (config-router)# destribute-list <acl> out [<interface>|<routing-process>]
+
+!!! 再配送時の経路の最適化
+
+
+!! アドミニストレーティブディスタンス
+
+!!! アドミニストレーティブディスタンスの変更
+!!!! EIGRPの場合
+ (configrouter)# distance eigrp <internal-AD> <eternal-AD>
+
+!!!! EIGRP以外の場合
+ (configrouter)# distance <AD> [<address> <mask> [<acl>]]
+
+!! ポリシーベースルーティング
+
+* すべての条件に一致しない場合、通常のルーティングを行う。
+
+!!! ポリシーベースルーティングの設定
+ (config)# route-map <tag> [permig|deny] [<sequence-number>]
+ (config)# match <condition>
+ (config)# set <action>
+ (config-if)# ip policy-map <tag>                               I/Fへ設定
+
+
+
+!!! ポリシーベースルーティングで使用されているポリシーを確認
+ # show ip policy
+
+!!! ポリシーベースルーティングのモニター
+ # debug ip policy
+
+
+
+!! 確認コマンド
+!!! ディストリビューションリストの適用されているIFの確認
+ # show ip protocols

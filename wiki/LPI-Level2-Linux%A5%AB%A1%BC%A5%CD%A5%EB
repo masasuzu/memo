@@ -1,0 +1,155 @@
+! Linuxカーネル
+
+!! カーネルコンパイル
+* 現在のカーネルバージョンを確認する。
+** cat /proc/version
+** cat /etc/linux/version
+** uname -r
+
+* カーネルのコンフィギュレーションを確認する。
+** cat /usr/src/llinux/.config
+
+* 古いカーネルのコンフィギュレーションを新しいカーネルに適用したい。
+** make oldconfig
+
+* カーネルイメージを作成する。
+** make Image
+** make zImage
+** make bzImage
+*** サイズ制限が無い
+
+* カーネルパッチを当てた後に元の状態に戻したい。
+** patch -R
+
+* パッチが正常に適用された無かった時に作成されるファイルの拡張子。
+** .rej
+
+* カーネルソースに対してまとめてパッチを当てたい。
+** /usr/src/linux/scripts/patch-kernel
+
+* ビルドファイルを削除して、カーネルソースツリーを初期化する
+** make mrproper
+
+* 初期RAMディスクを作成する。
+** mkinitd (2.4)
+** mkinitramfs (2.6)
+
+* 2.4系の初期RAMディスクはgzipで圧縮されている。
+
+* 2.6系の初期RAMディスクはcpioでアーカイブ化されている。
+
+!!! カーネル2.4
+ make mrproper
+ make menuconfig
+ make dep 
+ make clean
+ make bzImage
+ make module
+ make module_install
+
+!!! カーネル2.6
+ make menuconfig
+ make
+ make module_install
+ make install
+
+
+!! カーネルモジュールの管理
+* カーネルモジュールのインストール場所
+** /lib/modules
+*** カーネルバージョンごとにディレクトリに分かれてインストールされる。
+*** ディレクトリの設定は/usr/src/linux/Makefileで設定する。
+
+* modprobeでモジュールをロードしようとして失敗したとき
+** depmod -a で依存関係を再構築する。
+
+* システムにロードされているモジュールを一覧表示したい。
+** lsmod
+** cat /proc/modules
+
+!!! lsmod
+現在ロードされているモジュールの一覧を表示する
+
+ lsmod
+
+ masasuzu@henry% lsmod | head -10                                                                [~]
+ Module                  Size  Used by
+ cryptd                  8140  0 
+ aes_x86_64              7936  417 
+ aes_generic            27631  1 aes_x86_64
+ dm_crypt               13381  0 
+ nvidia               8097831  34 
+ binfmt_misc             7984  1 
+ vboxnetadp              5267  0 
+ vboxnetflt             14966  1 
+ vboxdrv              1792856  3 vboxnetadp,vboxnetflt
+
+
+!!! modinfo
+モジュールの情報を表示する。
+
+ modinfo [option] module-name
+
+||!オプション||!説明||
+|| -a || 作者名を表示 ||
+|| -d || 説明を表示 ||
+|| -l || ライセンスを表示 ||
+|| -n || モジュールファイル名を表示する ||
+
+!!! insmod
+ローダブルモジュールをロードする
+
+ insmof [option] module-name
+
+||!オプション||!説明||
+|| -s || syslogに実行結果を吐く ||
+|| -v || 詳細情報を表示 ||
+
+!!! rmmod
+ロードされているモジュールをアンロードする。
+
+ rmmod [option] module-name
+
+||!オプション||!説明||
+|| -a || 未使用モジュールをすべてアンロードする ||
+|| -s || syslogに実行結果を吐く ||
+
+
+!!! modprobe
+モジュールのロードアンロードをする。
+
+ modprobe [option] module-name
+
+||!オプション||!説明||
+|| -a || すべてのモジュールをロードする ||
+|| -c || 現在使われている設定を表示する ||
+|| -l || パターンにマッチしたローダブルなモジュール一覧を表示する ||
+|| -n || 表示する ||
+|| -r || モジュールをアンロードする ||
+|| -t || 特定機能のモジュールを扱う ||
+|| -C || 設定ファイルを指定する ||
+|| --show-depends || モジュールの依存関係を表示する ||
+
+!! modules.dep
+* depmodを実行すると更新される
+
+* 構造
+ /path/to/module: /path/to/depended-modulle ...
+
+!! /etc/modprobe.conf
+* カーネルモジュールのエイリアス設定
+* モジュールをロード/アンロードする際の前後処理
+
+
+!! カーネルパラメータの変更
+
+!!! sysctl
+カーネルパラメータを表示、設定する。
+
+ sysctl [option] [parameter]
+ sysctl -w parameter=value
+
+||! オプション ||! 説明 ||
+|| -a || 現在利用できるパラメータを表示する ||
+|| -p || 指定したファイルから設定を読み込む ||
+|| -w || パラメータを更新する ||

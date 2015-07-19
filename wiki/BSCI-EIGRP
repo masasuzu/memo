@@ -1,0 +1,162 @@
+! EIGRP
+
+{{toc}}
+
+!! EIGRPの特徴
+* DUAL(Diffusing Update ALgorism)
+** メトリックに距離情報を使用し、ループフリーの最短パスを効果的に選択するアルゴリズムです。
+* RTP(Reliable Transport Protocol)
+** シーケンス番号やACKを使用してEIGRPパケットを正確な順番で送信し、信頼を高めます。
+* neighbor検出/確認
+** Helloパケットを定期的に送信し、ネイバーの自動検出と確認を行います。
+* PDM(Protocol-Dpendent Modules)
+** ネットワーク層ではIP、AppleTalk、IPXをサポートします。
+
+!! EIGRPのテーブル
+* ネイバーテーブル
+* トポロジーテーブル
+* ルーティングテーブル
+
+!! EIGRPのメトリック
+* 帯域幅 デフォルト
+* 遅延 デフォルト
+* 信頼性
+* 負荷
+* MTU
+
+ EIGRPメトリック = (帯域幅 + 遅延) * 256
+ 帯域幅 = (10000000/最小帯域)
+ 遅延 = 遅延の累計
+
+!!! K値
+デフォルトのK値
+K1=1、K2=0、K3=1、K4=0、K5=0
+
+* K値は変更しないことを推奨されています。
+
+* K値が一致しない場合、隣接関係を確立しません。
+
+!! EIGRPの状態
+: Active:
+:: サクセサがダウンし、ネイバーにクエリを問い合わせ中
+: Update:
+:: ネイバーにアップデートを送信しAck待ちの状態
+: Query:
+:: クエリを受信し、相手からの応答待ち
+: Passive:
+::ネットワークが利用可能。ルーティングテーブルに格納可能。
+
+!! SIA
+ネイバーから応答が帰ってこないため、ずっとAcitiveの状態のままになること。
+
+!!! SIAの原因
+* 隣接ルータが過負荷により、クエリやリプライパケットの処理ができない。
+* ルータ間でクエリやリプライパケットを失う。
+
+
+!!! SIAの解決方法
+* ルート集約によりクエリを制限
+* スタブを構成し、クエリを抑制
+
+!! EIGRPのパケット
+* 高信頼性パケット
+** アップデート
+** クエリ
+** 応答
+* 無信頼性パケット
+** ACK
+** Hello
+
+!!! EIGPのHelloパケット
+* 5秒間隔
+* 1.5MbpsのPoint-to-MaltiPoint回線の場合、60秒間隔
+* I/Fごとに設定
+ (config) ip hello-interval eigrp <as> <sec>
+
+ (config) ip hello-time eigrp <as> <sec>
+
+!!! EIGRPパケット使用率の変更
+ (config) ip bandwidth-percent eigrp <as> <percentage>
+
+!! ポイントツーマルチポイントネットワーク
+!!! 帯域設定
+* 一番小さなCIR*スポーク数の値をインターフェースに設定する
+
+!!! タイマー
+||! ネイバー間のリンク帯域 ||! Hello感覚 ||! ホールドタイム ||
+|| 1.545Mbps以上           || 5秒        || 15秒            ||
+|| 1.545Mbps以下           || 60秒       || 180秒           ||
+
+!!! 設定
+ ip hello-interval eigrp <as> <sec>
+ ip hold-time eigrp <as> <sec>
+
+!! EIGRPの設定
+ (config) router eigrp <as>
+ (config-router) network <network-number> [<wildcard-mask>]
+
+!!! シリアルリンクの場合
+ (config-if) bandwidth <kilobits> ! 帯域幅の設定
+
+!!! 経路集約
+ (config-if) ip summary-address eigrp <as> <address> <mask> [<admin distance>]
+
+!!! スタブ
+ (config-if) eigrp stub [ receive-only | connected | static | summary ]
+
+* receive-only
+** ルート情報を一切送信しない（受信はする）
+* connected
+** 直接接続されたルートのみ送信
+* static
+** スタティックルートのみ送信
+* summary
+** サマリールートのみ送信
+* デフォルトではconnectedとsummaryをアドバタイズする。
+
+!! アドミニストレイティブディスタンス
+||! ルートの情報源 ||! アドミニストレイティブディスタンス値 ||
+|| Direct          || 0                                     ||
+|| Connected       || 1                                     ||
+|| EIGRP Summary   || 5                                     ||
+|| eBGP            || 20                                    ||
+|| Internal EIGRP  || 90                                    ||
+|| External EIGRP  || 170                                   ||
+|| iBGP            || 200                                   ||
+
+!! 経路の選択
+: AD(Advertised Distance):
+:: ネクストホップルータから宛先ネットワークまでのコスト
+: FD(Feasible Distance):
+:: ADにローカルルータからネクストホップルータまでのコストを足したもの
+
+: サクセサ:
+:: FDが最も小さいネクストホップルータ
+: フィージブルサクセサ:
+:: バックアップのネクストホップルータ
+
+ フィージブルサクセサの条件 = AD < 現在のサクセサのFD
+
+!! ネイバー認証
+* MD5認証のみサポート
+* キーチェーンを用いて複数の鍵をサポート
+
+!!! I/Fの設定
+ (config-if)# ip authentication mode eigrp <as> md5         ! EIGRPパケットのMD5認証の有効化
+ (config-if)# ip authentication key-chain eigrp <as> <key>  ! 認証のために使用するkey-chainを指定
+
+!!! ルータの設定
+ (config)# key chain <key>                    ! key-chainを定義
+ (config-keychain)# <key-id>                  ! key-idを定義
+ (config-keychain-key)# key-string <password> ! 認証用のパスワードの設定
+
+!!! ライフタイムの設定
+ (config-keychain-key)# accept-lifetime <start-time> {<end-time>|infinite|duration <sec>}
+ ! 受信パケットで鍵を使用できる時間を指定する
+ (config-keychain-key)# send-lifetime <start-time> {<end-time>|infinite|duration <sec>}
+ ! 送信パケットで鍵を使用できる時間を指定する
+
+* 送信時
+** キーチェーン内のアクティブなキーのうち、最も番号が小さなものを使用する。
+* 受信時
+** キーチェーン内のアクティブな鍵全てを使用できる

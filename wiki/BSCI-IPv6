@@ -1,0 +1,41 @@
+! BSCI-IPv6
+
+{{toc_here}}
+
+!! 特徴
+
+* 広大なアドレス空間を利用できる
+* アドレスを自動的に付与する
+* モバイル環境をサポートする
+* IPSecによるセキュリティ機能を持っている
+
+!! アドレス
+: 6to4:
+:: 2002::/16
+
+
+
+!! Next Header
+* 基本ヘッダと拡張ヘッダの両方に存在
+* 基本へっdに続く情報のタイプを指定する
+
+!! 自動アドレス設定
+!!! ステートレス自動設定
+* NDPを使用して近くのルータから必要な情報を取得
+** ノードがルータへルータ要請RSを送信する
+** ルータはノードへルータ通知RAで応答する
+
+
+!!! ステートフル自動設定
+* DHCPサーバが必要
+
+!! 設定
+!!! IPv6有効化
+ (config)# ipv6 unicast-routing
+
+!!! 6to4トンネル設定
+ (config)# interface Tunnel10
+ (config-if)#tunnel mode ipv6ip 6to4
+
+!!! OSPFv3有効化
+ (config)# ipv6 router ospf <process-id>

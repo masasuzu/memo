@@ -1,0 +1,13 @@
+! Pythonのデフォルトエンコーディング
+
+Pythonのデフォルトエンコードは、
+C:\Python25\Lib\site-packages\sitecustomize.py
+で設定できます。日本語Windows上では以下のようにしてみてください。
+
+ #!python
+ import sys
+ sys.setdefaultencoding('shift_jis')
+
+例えば、以下のサイトなどを参考にしてみてください。
+
+http://d.hatena.ne.jp/SumiTomohiko/20070120/1169300624

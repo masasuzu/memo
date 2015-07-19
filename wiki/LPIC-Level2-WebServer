@@ -1,0 +1,30 @@
+!Apache
+*パフォーマンス改善に役立つ設定
+** KeepAliveを有効にする
+** HostNameLookupsを無効にする
+
+
+*インデックスの設定
+**DirectoryIndex index.html index.php
+
+*エイリアスの設定
+**Alias /images /path/to/images
+
+
+*エラードキュメント
+**ErrorDocument 404 /404.html
+
+
+*ベーシック認証ファイル作成
+**htpasswd -c /path/to/htpasswd username
+
+*ベーシック認証ユーザ追加
+**htpasswd /path/to/htpasswd username
+
+*名前ベースのバーチャルホストの設定
+**NameVirtualHost *:80
+
+!Squid
+
+*動的ページをキャッシュしないようにする
+**hierarchy_stoplist keyword

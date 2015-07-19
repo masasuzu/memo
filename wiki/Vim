@@ -1,0 +1,22 @@
+! はじめに
+vimを使うに当たって忘れがちな項目に関するメモを記述します。
+
+! コマンド
+* シェルで''command''を実行
+** :! ''command''
+
+! 設定
+* 行番号を非表示
+** set number
+* タブの画面上での幅
+** set tabstop=4
+* vimが自動で挿入するインデントの値
+** set shiftwidth=4
+* キーボードで入力した<tab>で挿入される空白の量
+** set softtabstop=0
+* タブをスペースに展開する)
+** set expandtab
+* 自動的にインデントする
+** set autoindent
+* 括弧入力時に対応する括弧を表示する
+** set showmatch

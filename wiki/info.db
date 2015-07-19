@@ -1,0 +1,1015 @@
+{
+"%A5%AA%A5%D6%A5%B8%A5%A7%A5%AF%A5%C8%BB%D8%B8%FE" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1265452649),
+:references => [
+],
+:title => "\245\252\245\326\245\270\245\247\245\257\245\310\273\330\270\376",
+},
+"%A5%BD%A1%BC%A5%B9%A5%B3%A1%BC%A5%C9%A5%EA%A1%BC%A5%C7%A5%A3%A5%F3%A5%B0%A5%EF%A1%BC%A5%AF%A5%B7%A5%E7%A5%C3%A5%D72010" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1265460980),
+:references => [
+],
+:title => "\245\275\241\274\245\271\245\263\241\274\245\311\245\352\241\274\245\307\245\243\245\363\245\260\245\357\241\274\245\257\245\267\245\347\245\303\245\3272010",
+},
+"%A5%C6%A5%B9%A5%C8%B6%EE%C6%B0%B3%AB%C8%AF%BC%D4%A4%CF3%BD%B5%CC%DC%A4%C7%BB%E0%A4%CC%A4%CE%A4%AB" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1254703334),
+:references => [
+],
+:title => "\245\306\245\271\245\310\266\356\306\260\263\253\310\257\274\324\244\3173\275\265\314\334\244\307\273\340\244\314\244\316\244\253",
+},
+"%A5%C6%A5%B9%A5%C8%B6%EE%C6%B0%B3%AB%C8%AF%C6%FE%CC%E7%A4%F2%BC%CC%B7%D0" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1243473691),
+:references => [
+],
+:title => "\245\306\245\271\245\310\266\356\306\260\263\253\310\257\306\376\314\347\244\362\274\314\267\320",
+},
+"%A5%C6%A5%B9%A5%C8%B6%EE%C6%B0%B3%AB%C8%AF%C6%FE%CC%E7%A4%F2%BC%CC%B7%D0%C2%E81%BE%CF" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"Python",
+"TDD",
+],
+:last_modified => Time.at(1243474754),
+:references => [
+],
+:title => "\245\306\245\271\245\310\266\356\306\260\263\253\310\257\306\376\314\347\244\362\274\314\267\320\302\3501\276\317",
+},
+"%A5%C6%A5%B9%A5%C8%B6%EE%C6%B0%B3%AB%C8%AF%C6%FE%CC%E7%A4%F2%BC%CC%B7%D0%C2%E82%BE%CF" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"Python",
+"TDD",
+],
+:last_modified => Time.at(1243475320),
+:references => [
+],
+:title => "\245\306\245\271\245\310\266\356\306\260\263\253\310\257\306\376\314\347\244\362\274\314\267\320\302\3502\276\317",
+},
+"%A5%C6%A5%B9%A5%C8%B6%EE%C6%B0%B3%AB%C8%AF%C6%FE%CC%E7%A4%F2%BC%CC%B7%D0%C2%E83%BE%CF" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"Python",
+"TDD",
+],
+:last_modified => Time.at(1243476419),
+:references => [
+],
+:title => "\245\306\245\271\245\310\266\356\306\260\263\253\310\257\306\376\314\347\244\362\274\314\267\320\302\3503\276\317",
+},
+"%A5%C6%A5%B9%A5%C8%B6%EE%C6%B0%B3%AB%C8%AF%C6%FE%CC%E7%A4%F2%BC%CC%B7%D0%C2%E84%BE%CF" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"Python",
+"TDD",
+],
+:last_modified => Time.at(1243477195),
+:references => [
+],
+:title => "\245\306\245\271\245\310\266\356\306\260\263\253\310\257\306\376\314\347\244\362\274\314\267\320\302\3504\276\317",
+},
+"." => {
+:count => 0,
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1236792465),
+:references => [
+"FrontPage",
+"InterWikiName",
+"SideMenu",
+"TextFormattingRules",
+"RubyMemo",
+"PythonMemo",
+"VimMemo",
+],
+:title => "",
+},
+"BCMSN" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"CCNP",
+"BCMSN",
+],
+:last_modified => Time.at(1239539100),
+:references => [
+],
+:title => "BCMSN",
+},
+"BCMSN-CampusNetwork" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"CCNP",
+"BCMSN",
+"\245\255\245\343\245\363\245\321\245\271\245\315\245\303\245\310\245\357\241\274\245\257",
+],
+:last_modified => Time.at(1242436620),
+:references => [
+],
+:title => "BCMSN-CampusNetwork",
+},
+"BCMSN-EtherChannel" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"CCNP",
+"BCMSN",
+"EtherChannel",
+],
+:last_modified => Time.at(1243514341),
+:references => [
+],
+:title => "BCMSN-EtherChannel",
+},
+"BCMSN-IPTelephony" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"CCNP",
+"BCMSN",
+"IP\245\306\245\354\245\325\245\251\245\313\241\274",
+],
+:last_modified => Time.at(1243041742),
+:references => [
+],
+:title => "BCMSN-IPTelephony",
+},
+"BCMSN-MultiLayerSwitching" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"CCNP",
+"BCMSN",
+"\245\336\245\353\245\306\245\243\245\354\245\244\245\344\241\274\245\271\245\244\245\303\245\301\245\363\245\260",
+],
+:last_modified => Time.at(1242690677),
+:references => [
+],
+:title => "BCMSN-MultiLayerSwitching",
+},
+"BCMSN-Redundancy" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"CCNP",
+"BCMSN",
+"\276\351\304\271\262\275",
+],
+:last_modified => Time.at(1242738461),
+:references => [
+],
+:title => "BCMSN-Redundancy",
+},
+"BCMSN-STP" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"CCNP",
+"BCMSN",
+"STP",
+],
+:last_modified => Time.at(1243514492),
+:references => [
+],
+:title => "BCMSN-STP",
+},
+"BCMSN-Security" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"CCNP",
+"BCMSN",
+"\245\273\245\255\245\345\245\352\245\306\245\243",
+],
+:last_modified => Time.at(1242738563),
+:references => [
+],
+:title => "BCMSN-Security",
+},
+"BCMSN-VLAN" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"CCNP",
+"BCMSN",
+"VLAN",
+],
+:last_modified => Time.at(1243309322),
+:references => [
+],
+:title => "BCMSN-VLAN",
+},
+"BGP" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1299716800),
+:references => [
+],
+:title => "BGP",
+},
+"BSCI-EIGRP" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"CCNP",
+"BSCI",
+"EIGRP",
+],
+:last_modified => Time.at(1248735262),
+:references => [
+],
+:title => "BSCI-EIGRP",
+},
+"BSCI-IPv6" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1248735291),
+:references => [
+],
+:title => "BSCI-IPv6",
+},
+"BSCI-ISIS" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"CCNP",
+"BSCI",
+"IS-IS",
+],
+:last_modified => Time.at(1248735307),
+:references => [
+],
+:title => "BSCI-ISIS",
+},
+"BSCI-Multicast" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"BSCI",
+"CCNP",
+"Muliticast",
+],
+:last_modified => Time.at(1248735228),
+:references => [
+],
+:title => "BSCI-Multicast",
+},
+"BSCI-OSPF" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"BSCI",
+"CCNP",
+"OSPF",
+],
+:last_modified => Time.at(1248735328),
+:references => [
+],
+:title => "BSCI-OSPF",
+},
+"BSCI-Redistribution" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"CCNP",
+"BSCI",
+"Redistribution",
+],
+:last_modified => Time.at(1248735344),
+:references => [
+],
+:title => "BSCI-Redistribution",
+},
+"CCNP" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1252317879),
+:references => [
+],
+:title => "CCNP",
+},
+"English-2009-05-08" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1241867743),
+:references => [
+],
+:title => "English-2009-05-08",
+},
+"English-2009-05-12" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1242567023),
+:references => [
+],
+:title => "English-2009-05-12",
+},
+"English-2009-05-15" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1242567155),
+:references => [
+],
+:title => "English-2009-05-15",
+},
+"English-2009-05-19" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1242736946),
+:references => [
+],
+:title => "English-2009-05-19",
+},
+"English-2009-05-22" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"English",
+],
+:last_modified => Time.at(1243038753),
+:references => [
+],
+:title => "English-2009-05-22",
+},
+"English-2009-05-27" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1243430795),
+:references => [
+],
+:title => "English-2009-05-27",
+},
+"English-2009-05-29" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1243686799),
+:references => [
+],
+:title => "English-2009-05-29",
+},
+"English-2009-06-16" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"English",
+],
+:last_modified => Time.at(1245682816),
+:references => [
+],
+:title => "English-2009-06-16",
+},
+"English-2009-10-21" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"English",
+],
+:last_modified => Time.at(1256124958),
+:references => [
+],
+:title => "English-2009-10-21",
+},
+"English-2009-10-25" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1256451050),
+:references => [
+],
+:title => "English-2009-10-25",
+},
+"English-2009-10-25-2" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1256452160),
+:references => [
+],
+:title => "English-2009-10-25-2",
+},
+"English-2009-10-26" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1257164083),
+:references => [
+],
+:title => "English-2009-10-26",
+},
+"English-2009-11-04" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1257320095),
+:references => [
+],
+:title => "English-2009-11-04",
+},
+"English-2009-11-05" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1257382924),
+:references => [
+],
+:title => "English-2009-11-05",
+},
+"English-2009-11-06" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1257508150),
+:references => [
+],
+:title => "English-2009-11-06",
+},
+"English-2009-11-09" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1257768756),
+:references => [
+],
+:title => "English-2009-11-09",
+},
+"English-2009-11-10" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1257905157),
+:references => [
+],
+:title => "English-2009-11-10",
+},
+"English-2009-11-11" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1257939131),
+:references => [
+],
+:title => "English-2009-11-11",
+},
+"English-2009-11-12" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1258012025),
+:references => [
+],
+:title => "English-2009-11-12",
+},
+"English-2009-11-15" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1258716939),
+:references => [
+],
+:title => "English-2009-11-15",
+},
+"English-2009-11-20" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1258717917),
+:references => [
+],
+:title => "English-2009-11-20",
+},
+"English-2009-11-24" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1259065653),
+:references => [
+],
+:title => "English-2009-11-24",
+},
+"English-2010-01-27" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1264549064),
+:references => [
+],
+:title => "English-2010-01-27",
+},
+"English-2010-10-23" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1287812917),
+:references => [
+],
+:title => "English-2010-10-23",
+},
+"EnglishFood" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1256564033),
+:references => [
+],
+:title => "EnglishFood",
+},
+"EnglishWeather" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1256562711),
+:references => [
+],
+:title => "EnglishWeather",
+},
+"FrontPage" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1290301448),
+:references => [
+"PythonCodeReading8",
+"PythonCodeReading10",
+],
+:title => "masasuzu wiki",
+},
+"IPv6" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1239239274),
+:references => [
+],
+:title => "IPv6",
+},
+"ISCW" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1252226296),
+:references => [
+],
+:title => "ISCW",
+},
+"InterWikiName" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1235298103),
+:references => [
+],
+:title => "InterWikiName",
+},
+"JanogMeeting24_1st" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"Janog",
+"Network",
+],
+:last_modified => Time.at(1247144507),
+:references => [
+],
+:title => "JanogMeeting24_1st",
+},
+"Java" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"Java",
+],
+:last_modified => Time.at(1299715996),
+:references => [
+],
+:title => "Java",
+},
+"JavaMemo" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1254702581),
+:references => [
+],
+:title => "JavaMemo",
+},
+"Juniper" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1237961072),
+:references => [
+],
+:title => "Juniper",
+},
+"LDAP" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1292487628),
+:references => [
+],
+:title => "LDAP",
+},
+"LPI-Level2" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1290308609),
+:references => [
+],
+:title => "LPI-Level2",
+},
+"LPI-Level2-%A5%B7%A5%B9%A5%C6%A5%E0%A4%CE%B5%AF%C6%B0" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1296567249),
+:references => [
+],
+:title => "LPI-Level2-\245\267\245\271\245\306\245\340\244\316\265\257\306\260",
+},
+"LPI-Level2-Linux%A5%AB%A1%BC%A5%CD%A5%EB" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"linux",
+],
+:last_modified => Time.at(1296566850),
+:references => [
+],
+:title => "LPI-Level2-Linux\245\253\241\274\245\315\245\353",
+},
+"LPIC-Level2-%A5%CD%A5%C3%A5%C8%A5%EF%A1%BC%A5%AF%A5%AF%A5%E9%A5%A4%A5%A2%A5%F3%A5%C8%B4%C9%CD%FD" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"lpic",
+"linux",
+"ldap",
+"pam",
+],
+:last_modified => Time.at(1300690892),
+:references => [
+],
+:title => "LPIC-Level2-\245\315\245\303\245\310\245\357\241\274\245\257\245\257\245\351\245\244\245\242\245\363\245\310\264\311\315\375",
+},
+"LPIC-Level2-%A5%D5%A5%A1%A5%A4%A5%EB%B6%A6%CD%AD" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"LPIC",
+"smb",
+"samba",
+"nfs",
+],
+:last_modified => Time.at(1312280841),
+:references => [
+],
+:title => "LPIC-Level2-\245\325\245\241\245\244\245\353\266\246\315\255",
+},
+"LPIC-Level2-WebServer" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"LPIC",
+"Linux",
+"Apache",
+],
+:last_modified => Time.at(1300680134),
+:references => [
+],
+:title => "LPIC-Level2-WebServer",
+},
+"MPLS" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"Network",
+"MPLS",
+],
+:last_modified => Time.at(1299716435),
+:references => [
+],
+:title => "MPLS",
+},
+"MySQL" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1295252234),
+:references => [
+],
+:title => "MySQL",
+},
+"Net%3A%3ALDAP" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1299715751),
+:references => [
+],
+:title => "Net::LDAP",
+},
+"ONT-VoIP" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"CCNP",
+"ONT",
+"VoIP",
+],
+:last_modified => Time.at(1248824177),
+:references => [
+],
+:title => "ONT-VoIP",
+},
+"ONT-WLAN" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1250639254),
+:references => [
+],
+:title => "ONT-WLAN",
+},
+"PFP%B4%D8%C5%ECWS%2311" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1237536482),
+:references => [
+],
+:title => "PFP\264\330\305\354WS#11",
+},
+"Python" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1299716055),
+:references => [
+],
+:title => "Python",
+},
+"PythonCodeReading10" => {
+:count => 0,
+:editor => "admin",
+:freeze => false,
+:keyword => [
+"Python",
+"CodeReading",
+"Test",
+"TDD",
+],
+:last_modified => Time.at(1245163689),
+:references => [
+"PythonCodeReading10",
+],
+:title => "PythonCodeReading10",
+},
+"PythonCodeReading8" => {
+:count => 0,
+:editor => "admin",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1245163636),
+:references => [
+],
+:title => "PythonCodeReading8",
+},
+"RIP" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"Network",
+],
+:last_modified => Time.at(1299716114),
+:references => [
+],
+:title => "RIP",
+},
+"Report" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1265500088),
+:references => [
+"PythonCodeReading8",
+"PythonCodeReading10",
+],
+:title => "Report",
+},
+"SandBox" => {
+:count => 0,
+:editor => "admin",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1236820999),
+:references => [
+],
+:title => "SandBox",
+},
+"SandBox2" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1245073040),
+:references => [
+],
+:title => "SandBox2",
+},
+"SideMenu" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1292486316),
+:references => [
+],
+:title => "SideMenu",
+},
+"Solaris" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+"Solaris",
+],
+:last_modified => Time.at(1299716273),
+:references => [
+],
+:title => "Solaris",
+},
+"TextFormattingRules" => {
+:count => 0,
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1235298104),
+:references => [
+"InterWikiName",
+],
+:title => "",
+},
+"Vim" => {
+:count => 0,
+:editor => "masasuzu",
+:freeze => false,
+:keyword => [
+],
+:last_modified => Time.at(1236854859),
+:references => [
+],
+:title => "Vim",
+},
+}

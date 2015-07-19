@@ -1,0 +1,131 @@
+{{toc}}
+
+! VLAN
+* VLAN1、VLAN1002-1005はデフォルトで存在
+
+* show vlanのportsに表示されないportsはトランクポート
+
+* ダイナミックVLAN
+** ポートに接続された機器のMACアドレスに基づき、VLANを割り当てる
+** 機器の移動が容易
+** VMPSサーバが必要
+
+* show vlan id ''<vlan-id>''で見れる情報
+** MTU
+** 割り当てポート
+** 名前
+** タイプ
+
+!! トランク
+* トランキングプロトコル
+** ISL
+*** (config-if)#switchport trunk encapsulation dot1q
+** IEEE802.q
+*** (config-if)#switchport trunk encapsulation isl
+*** IEEE標準
+*** フレームに4バイトのタグを挿入
+*** CRC再計算
+
+Ethernetフレーム
+||! 宛先MAC ||! 送信元MAC ||! データ ||! FCS ||
+
+ISLフレーム
+||! ISLヘッダ(26byte) ||! 宛先MAC ||! 送信元MAC ||! データ ||! FCS ||! ISL用FCS(4byte) ||
+
+802.qフレーム
+||! 宛先MAC ||! 送信元MAC ||! タグ(4byte)||! データ ||! 再計算したFCS ||
+
+!!! IEEE802.1Q
+* イーサネットフレームに4バイトのフィールドを追加
+* プロトコルはポイントツーポイントコネクティビティを使用する
+* IEEE802.1Qフレームは元の宛先MACアドレスを維持する
+
+* トランスペアレントVLANにおいて重複して顧客のVLANID をサポートするためにISPが使用する。
+
+!! DTP
+* 管理モード
+** (config-if)#switchport mode access
+*** 対向ポートに関係なくアクセスポートに設定
+** (config-if)#switchport mode trunk
+*** 対向ポートに関係なくトランクポートに設定
+** (config-if)#switchport mode nonegotiate
+*** トランクポートに設定
+*** 対向ポートがDTPをサポートしていない場合に設定
+** (config-if)#switchport mode dynamic desirable
+*** 対向ポートがaccessでない場合のみ、トランクポートとして確立
+*** Native VLANは無視される
+*** IOSでのデフォルト
+**** ただしサポートしていない機器も存在(Catalyst2950等)
+** (config-if)#switchport mode dynamic auto
+*** 対向ポートがdesirable/trunkの場合、トランクポートとして確立 
+
+
+* 管理モードの組み合わせ
+||! 管理モード         ||! access  ||! dynamic auto ||! dynamic desirable ||! trunk   ||
+||! access             ||  access  ||  access       ||  access            ||  (error) ||
+||! dynamic auto       ||  access  ||  access       ||  trunk             ||  trunk   ||
+||! dynamic desirable  ||  access  ||  trunk        ||  trunk             ||  trunk   ||
+||! trunk              ||  (error) ||  trunk        ||  trunk             ||  trunk   ||
+
+* トランクポートで許可するVLANの設定
+** (config-if)#switchport trunk allowed vlan <vlan-id>
+
+!! VTP
+* VTPメッセージはVLALN1を経由して伝送される
+
+!!! VTPパスワード
+* 同一ドメイン内の全てのスイッチで同一パスワードを設定する。
+* VTPパスワードは要約アドバタイズメントでMD5暗号化ハッシュコードとして搬送される。
+
+!!! VTPドメイン
+* Catalystは1つのドメインに飲み所属する
+* Catalystは同じドメインからのVTPのみ処理する
+* デフォルトのドメイン名はNULL
+
+!!! VTPトランスペアレントモードの特徴
+* 常にリビジョン0
+* VLAN情報をアドバタイズしない
+* VLAN設定をrunning-configに保存する
+* VTP管理ドメインのVLAN情報に関与しない
+* ドメイン名は大文字小文字を区別する
+
+!!! VTPプルーニング
+* デフォルトで無効
+* 使われいないVLANへフレームを転送しない
+* プルーニング対象は2-1001
+* VTPサーバで設定した場合、ドメイン全体プルーニングが有効になる
+
+!!! VTPによるVLAN情報の同期の条件
+* トランクポート接続
+* VTPドメインの一致
+* VTPモードがクライアント/サーバ
+* VTPパスワードの一致
+* VTPバージョンの一致
+
+!!! VTPメッセージタイプ
+* 要約アドバタイズメント
+** 5分ごとに発行
+** VTPドメイン名
+** リビジョン番号
+** MD5暗号化ハッシュコード
+* アドバタイズメント要求
+** 自分より大きいリビジョンのアドバタイズメントを受信時
+** VTPドメイン変更時
+** スイッチリセット時
+* サブセットアドバタイズメント
+** VLAN情報リスト
+* VTP加入メッセージ
+
+!!! VTPバージョン2で追加された機能
+* VLANの効率的な整合性チェック
+* 認識不能なTLVのサポート
+* バージョンに依存しないトランスペアレントモードんお動作
+* トークンリングのサポート
+
+!!! VTPモード
+||! 機能                          ||! サーバ ||! クライアント ||! トランスペアレント ||
+||! VLANの作成･削除               || ○      || ×            || ○                  ||
+||! VLAN情報の保存(FLASH)         || ○      || ○            || ○                  ||
+||! VLAN情報の保存(running-config)|| ×      || ×            || ○                  ||
+||! VTPの送受信                   || ○      || ○            || ×                  ||
+||! VTPの転送                     || ○      || ○            || ○                  ||

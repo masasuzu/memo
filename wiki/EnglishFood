@@ -1,0 +1,45 @@
+! 調理法
+: deep fried:
+:: 揚げた
+: grilled:
+:: 焼いた
+: boiled:
+:: 茹でた
+: steamed:
+:: 蒸した
+: raw:
+:: 生の
+: fried:
+:: 炒める
+
+! 味
+: sweet:
+:: 甘い
+: sour:
+:: 酸っぱい
+: salty:
+:: しょっぱい
+: rich:
+:: 味が濃い
+: spicy:
+:: 辛い
+: bitter:
+:: 苦い
+: fishy:
+:: 魚臭い
+
+! 食感
+: chewy:
+:: よくかむ必要がある
+: crunchy:
+:: ばりばりする
+: tender:
+:: 柔らかい
+: slimy:
+:: ねばねばした
+: juicy:
+:: 汁気が多い
+: oily:
+:: 脂っこい
+: sticky:
+:: 粘つく

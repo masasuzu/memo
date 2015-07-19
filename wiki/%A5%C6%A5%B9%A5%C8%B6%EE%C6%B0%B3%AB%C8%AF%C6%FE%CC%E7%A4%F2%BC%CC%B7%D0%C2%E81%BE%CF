@@ -1,0 +1,28 @@
+! テスト駆動開発入門を写経第1章
+!! Python
+<<<
+#!/usr/bin/env python
+#coding: utf-8
+"""
+テスト駆動開発入門1章
+"""
+import unittest
+
+class TestMoney(unittest.TestCase):
+
+    def testMultiplication(self):
+        five = Dollar(5)
+        five.times(2)
+        self.assertEqual(10, five.amount)
+
+class Dollar(object):
+
+    def __init__(self, amount):
+        self.amount = amount
+    
+    def times(self, multiplier):
+        self.amount *= multiplier
+
+if __name__ == "__main__":
+    unittest.main()
+>>>

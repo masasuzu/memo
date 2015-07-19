@@ -1,0 +1,133 @@
+{{toc_here}}
+
+! スパンニングツリー
+* SPTのデフォルトのプライオリティ
+** 32768
+* spanning-tree vlan [VLAN_ID] root secondary
+** 28672
+
+* MAX Age : 20
+* 
+
+* STPタイマーの変更が必要な場合は、ルートブリッジとルートブリッジのバックアップ用スイッチで変更する
+* ブロッキングポートで最大経過時間（Max Age）までBPDUを受信しなかった場合、リスニング状態となる。
+* BPDUにはルートブリッジのSTPタイマーの値が含まれています
+
+!! 拡張システムIDを使用するBID
+BID
+|| プライオリティ16bit || MACアドレス48bit ||
+
+拡張システムIDを使用するBID
+|| プライオリティ4bit || 拡張システムID12bit|| MACアドレス48bit ||
+
+* 4ビットのプライオリティを持つ
+* 12ビットの拡張システムIDを持つ
+* 拡張システムIDはVLAN番号である
+* プライオリティは4096の倍数で指定できる。
+
+!! STPトポロジー変化時
+* トポロジーチェンジフラグがセットされたBPDUを受信
+** MACアドレスのエージングタイムがForward Delayの値になる
+** MACアドレスのエージングタイムが変更されるのはMAX Age+ Forward Delayの間
+
+「トポロジーチェンジフラグ」を受信している間、各スイッチはMACアドレステーブルのエージングタイム（MACアドレステーブルをクリアするまでの時間　デフォルトで5分）を転送遅延（Forward Delay）の値に変更します。タイマーがデフォルトであれば、5分から15秒へ短縮します。
+
+トポロジーの変化を検出したスパニングツリーの収束は30秒〜50秒であるのに対して、MACアドレステーブルのエージングタイムがデフォルトで5分ですので、スパニングツリー収束後もスイッチが以前のMACアドレステーブルを持ち続けてしまい、ネットワークが不安定となる事を回避する為の手段です。
+
+!! STP高速化技術
+!!! UplinkFast
+* 収束までの時間を約30秒から1秒程度に短縮する
+* 直接的な障碍の収束を早める
+
+!!! ポートファスト
+* 即座にフォワーディング状態に遷移
+* ポートファストを設定したポートをエッジポートという
+
+* エッジポートでBPDUを受信
+** 非エッジポートに遷移
+** TCビットのセットされたBPDUを送信
+
+!!! バックボーンファスト
+* 収束までの時間を約50秒から30秒に短縮する
+* 間接的な障害の収束を早める
+
+!! スパンニングツリープロトコルの比較
+||! プロトコル ||! SPT   ||! RSTP  ||! MST   ||! CST   ||
+|| 規格        || 802.1d || 802.1w || 802.1s || 802.1q ||
+|| Ciscoの実装 || PVST+  || RapidPVST+ || MST || 無し  ||
+|| インスタンスの数 || VLAN毎 || VLAN毎 || 複数VLANで1つ || 全体1つ ||
+|| インスタンス毎の負荷分散 || 可 || 可 || 可 || 不可 ||
+
+
+!! STP保護
+!!! BPDUガード
+* PortFastを設定したポートでBPDUを送信する機器が接続される事を防ぐ
+* BPDUを受信すると、エラーディセーブルとなる
+
+* グローバル設定
+** PortFastを設定したポートで自動的にBPDUガードが有効
+ Switch(config)#spanning-tree portfast bpduguard default
+
+* IF設定
+** PortFastが設定されていないポートでも有効となる
+ Switch(config-if)#spanning-tree bpduguard enable
+
+
+
+!!! BPDUフィルタリング
+* BPDUを送信しない
+ (config)#spanning-tree portfast bpdufilter default
+
+ (config-if)#spanning-tree bpdufilter enable
+
+!!! ルートガード
+* 想定しないスイッチがルートブリッジになることを防ぐ
+* 上位BPDUを受信するとルート不整合をの状態に遷移
+ (config-if)#spanning-tree guard root
+
+!!! ループガード
+* 主に設定ミスが原因のBPDU喪失によるL2ループを防ぐ
+* 指定ポート以外でBPDUを受信しなくなるとフォワーディングではなくループ不整合というデータを送受信しない状態に遷移する
+ (config)#spanning-tree loopguard default
+
+ (config-if)#spanning-tree guard loop
+
+!!! UDLD
+* 主に物理障害が原因のBPDU喪失によるL2ループを防ぐ
+ (config)#udld enable ・・・通常モード
+ (config)#udld aggressive ・・・アグレッシブモード
+
+ (config-if)#udld port　・・・通常モード
+ (config-if)#udld port aggressive 　・・・アグレッシブモード
+
+!! RSTP
+* 非エッジポートで3回連続でBPDUを受信しないとRSTP情報は自動で削除される
+
+!! MST
+* MSTの有効化により自動的にRSTPも有効になる
+* MSTの設定を確認するコマンドはshow pending
+* MSTのISTインスタンスはMSTリージョン全体を1つのCSLT仮想ブリッジとして外部に示す必要がある
+* すべてのVLANはデフォルトでインスタンス0に属する
+
+!! MSTに必須の設定
+* コンフィグレーション名(領域名)を指定する
+* リビジョン番号を指定する
+* VLANにMSTインスタンスをマッピングする
+
+!! MSTコンフィギュレーションサブモードで設定する項目
+* 設定リビジョン番号
+* 領域名
+* VLAN/インスタンスマップ
+
+ Switch(config)#spanning-tree mst configuration
+               MSTコンフィグレーションモードへ移行
+ Switch(config-mst)#instance 1 vlan 10,30-40
+               VLANとMSTインスタンスとのマッピング
+ Switch(config-mst)#name BCMSN
+               コンフィグレーション名の指定
+ Switch(config-mst)#revision 0
+               リビジョン番号の指定
+ Switch(config-mst)#show pending
+               設定した内容を確認（この時点では未確定）
+ Switch(config-mst)#spanning-tree mode mst
+               指定した内容を確定（exitでMSTコンフィグレーションモードを抜けても確定する

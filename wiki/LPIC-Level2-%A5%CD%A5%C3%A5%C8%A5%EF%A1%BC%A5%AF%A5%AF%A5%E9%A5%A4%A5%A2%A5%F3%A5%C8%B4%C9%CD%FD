@@ -1,0 +1,74 @@
+! DHCP
+!! 設定
+* アドレスプールの設定
+ range 192.168.1.10 192.168.1.20;
+
+* MacアドレスごとにIPアドレスをひもづける
+
+ host hostname {
+     hardware ethernet 00:00:00:00:00:00;
+     fixed-address 192.168.1.11
+ }
+
+! PAM
+!!モジュールタイプ
+* auth
+** ユーザ認証を行う
+* account
+** ユーザ認証ができるかどうかを確認する
+* password
+** パスワードの設定と変更
+* session
+** ユーザ認証前後の処理
+
+!! コントロール
+* requisite
+** モジュールの実行失敗時に直ちに認証を拒否する
+* required
+** モジュールの実行失敗時、すべての同じタイプの認証が終了した時点で認証を拒否する
+* sufficient
+** モジュールの実行に成功した場合、上位のrequiredがすべて成功であれば認証成功とします
+* optional
+
+!! PAMモジュール
+:pam_env.so: ユーザログイン時の環境変数を初期化する
+:pam_deny.so:認証に対し失敗を返す
+:pam_limits.so: ユーザの利用できるリソースを制限する
+:pam_nologin.so: /etc/nnologinファイルがあれば一般ユーザのログインを拒否する
+:pam_pwdb.so: /etc/passwd, /etc/shadow, NISを使用したユーザ認証とパスワード変更を行う
+:pam_securetty.so: /etc/securetty に記載された端末のみログインを許可する
+:pam_stack.so: ほかのPAM設定をインクルードする
+:pam_unix.so: 通常のパスワード認証
+:pam_warn.so: 認証時とパスワード変更時にログ出力する
+:pam_wheel.so: root権限でのアクセスをwheelグループのみに制限する
+
+
+! LDAP
+
+!! コマンド
+
+* 追加
+ ldapadd
+* 検索
+ ldapsearch
+* 削除
+ ldapdelete
+* 変更
+ ldapmodify
+* パスワード変更
+ ldappasswd
+
+!!!オプション
+
+ldapadd
+
+: -h <hostname>: LDAPサーバを指定する
+: -x: SASLを用いず簡易認証を使用する
+: -D <bindDN>: 認証に使用するDNを指定する
+: -W: パスワードを対話的に入力する
+: -w <password>: パスワードを指定する
+: -f <ldiff-file>: LDIFファイルを指定する
+
+ldapsearch
+: -b <baseDN>: 検索を開始するBASEDNを指定する
+: -L: 検索結果をLDIFv1形式で表示する

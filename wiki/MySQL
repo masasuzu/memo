@@ -1,0 +1,21 @@
+! ユーザの設定
+!!マスター
+ GRANT ALL
+     ON project.*
+     TO project@'192.168.1.0/255.255.255.0'
+     IDENTIFIED  BY 'hogehoge';
+ UPDATE db
+     SET Db = 'project%'
+     WHERE Db = 'project' AND User = 'project';
+ FLUSH PRIVILEGES;
+
+
+!!スレーブ
+ GRANT SELECT, LOCK TABLES
+     ON project.*
+     TO project@'192.168.1.0/255.255.255.0'
+     IDENTIFIED  BY 'hogehoge';
+ UPDATE db
+     SET Db = 'project%'
+     WHERE Db = 'project' AND User = 'project';
+ FLUSH PRIVILEGES;

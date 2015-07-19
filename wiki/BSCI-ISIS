@@ -1,0 +1,163 @@
+! BSCI-ISIS
+
+{{toc_here}}
+
+!! IS-ISの概要
+!!! 特徴
+* OSI向けのルーティングプロトコルを拡張
+* IPのみの環境でもCLNSのアドレッシングが必要
+* AS内部で使用するIGP
+* リンクステート型プロトコル
+* クラスレスルーティングプロトコル
+* 大規模向け
+
+!!! OSIプロトコル
+* CLNS (Connectionless Network Protocol)
+* ES-IS (End System to Intermediate System)
+* IS-IS (Intermediate System to Intermediate System)
+
+: IS :
+:: ルーティング機能を持つノード
+: ES:
+:: ルーティング機能を持たないノード
+
+
+* Ciscoルータではレベル3ルーティングをサポートしていない
+** NSAPアドレスを2つの階層に分割しており、ドメインを示すフィールドがないため
+
+!! IS-ISの動作
+!!! OSIのルーティングレベル
+||! ルーティングレベル ||! プロトコル ||! 概要                 ||
+|| 0                   || ES-IS       || 同一サブネット間      ||
+|| 1                   || IS-IS       || 同一エリア内のIS間    ||
+|| 2                   || IS-IS       || 異なるエリアのIS間    ||
+|| 3                   || IDRP        || 異なるIS-ISドメイン間 ||
+
+!!! IS-ISルータのタイプ
+* L1/L2ルータ
+* L1ルータ
+* L2ルータ
+
+!!!! L1/L2ルータ
+* レベル1ルーティングとレベル2ルーティングをサポート
+* OSPFのABRに相当
+* デフォルト
+
+!!!! L1ルータ
+* 他エリアへの経路はデフォルトルートとしてIPルーティングテーブルに記載
+
+ (config)# router ISIS
+ (config-router)# is-type level-1
+
+ (config-if)# isis circuit-type level-1
+
+!!!! L2ルータ
+* IS-ISバックボーンを形成
+
+ (config)# router ISIS
+ (config-router)# is-type level-2-only
+
+ (config-if)# isis circuit-type level-2-only
+
+!!! バックボーン
+* L2ルータおよびL1/L2ルータの連なり
+
+!!! NSAPアドレス
+||!> IDP      ||!>> DSP                                        ||
+|| AFI || IDI || HODSP || システムID(6バイト) || NSEL(1バイト) ||
+
+: IDP(Initial Domain Part):
+:: ドメインの識別情報
+: AFI(Authority and Format ID):
+:: アドレス形式とアドレスの割り当て権限を特定
+:: 49のNSAPアドレスはプライベートアドレス
+: IDI(Initial Domain  ID):
+:: ドメイン識別ID
+: DSP(Domain Specific Part):
+:: IS-IS止め院内の経路決定に使用
+: HODSP(High Order Domain Specific Part):
+:: 上位DSP
+:: IPで言うところのサブネット
+: システムID:
+:: IS-ISネットワーク内のホストを特定する
+:: 同一エリア内のレベル1 ISに割り振るシステムIDはユニークでなければならない
+:: 同一エリア内のレベル2 ISに割り振るシステムIDはユニークでなければならない
+: NSEL(NSAP-Selector):
+:: 上位プロトコルを示す
+:: 00のNSAPアドレスがNET
+
+!!! NET
+* NNSELが00のNSAPアドレス
+* ルータの識別子
+
+ (config)# router ISIS
+ (config-router)# net <nsap-address>
+
+!!! SNPA (Subnetwork Point of Attachment)
+* NSAPアドレスに対応するL2アドレス
+
+!!! IS-ISのメトリック
+* デフォルト
+** 10
+* 遅延
+* コスト
+* エラー
+
+ (config-if)# isis metric <metric> [level-1|level-2]
+
+!!!! メトリックの拡張
+ (config)# router isis
+ (config-router)# metric-style wide
+
+
+!!! IS-ISのパケット
+* IS-IS Hello PDU
+* Link-State PDU
+* Sequence Number PDU
+** PSNP(Partial Sequence Number PDU)
+** CSNP(Complete Sequence Number PDU)
+
+: IS-IS Hello PDU:
+:: 隣接の確立と維持
+: Link-State PDU:
+:: リンクステート情報を広告
+: Sequence Number PDU:
+:: LSDBの同期を行うためんおPDU
+: PSNP:
+:: リンクステートの要求および確認応答
+:: Point-to-PointリンクではLSPの確認応答に使用
+:: OSPFのLSR LSAckに相当
+: CSNP:
+:: リンクステートのサマリ
+:: リンクステート情報データベースの配布
+:: OSPFのDBDに相当
+:: データベース同期のためにDISから定期的に送られる
+
+!!! IS-ISのネットワークタイプ
+* Point-to-Point
+* Broadcast
+
+
+!!! DIS
+* ブロードキャストネットワークで1台
+* プライオリティが1番高いルータ
+
+ (config-if)# isis priority l<priority>
+
+!!! IS-ISのアジャセンシーのレベル
+
+!!! LSDBの同期
+
+!!! 経路選択
+
+!!!! レベル1ルーティングテーブルの表示
+ show isis route
+
+!!!! レベル2ルーティングテーブルの表示
+ show clns route
+
+!!!! 隣接関係の状態を確認
+ show clns neighbors
+
+
+!! IS-ISの設定

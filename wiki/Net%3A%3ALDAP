@@ -1,0 +1,51 @@
+! Net::LDAP
+LDAPを操作するPerlモジュール
+
+! インストール
+Perl Package Managerから"perl-ldap"をインストール
+
+!! サンプル
+
+ #!perl
+ use Net::LDAP;
+ use strict;
+ # ActiveDirectoryに接続してユーザを検索します。
+ 
+ 
+ # LDAPオブジェクト生成
+ my $ldap = Net::LDAP->new( "172.16.1.123" );
+ 
+ # LDAPサーバにログイン
+ my $mesg = $ldap->bind( 'masasuzu@ad.hoge.co.jp', password => "Activedirのパスワード" );
+ if( $mesg->code == 0 ){
+         print "bind success\n";
+ } else {
+         warn "bind fail: ". $mesg->error;
+         exit( $mesg->error );
+ }
+ 
+ # ユーザ名masasuzuを検索
+ my $searchResult = $ldap->search( base => 'DC=ad,DC=hoge,DC=co,DC=jp', filter => "sAMAccountName=masasuzu" );
+ foreach my $entry ( $searchResult->entries ) {
+         $entry->dump
+ }
+ 
+ # ログアウトします。
+ $ldap->unbind;
+
+
+
+!! 参考 
+!!! CPAN 
+* http://search.cpan.org/~gbarr/perl-ldap-0.39/lib/Net/LDAP.pod
+** CPAN::Net::LDAP - Lightweight Directory Access Protocol
+* http://search.cpan.org/~gbarr/perl-ldap-0.39/lib/Net/LDAP/Search.pod
+** CPAN::Net::LDAP::Search - Object returned by Net::LDAP search method
+* http://search.cpan.org/~gbarr/perl-ldap-0.39/lib/Net/LDAP/Entry.pod
+** CPAN::Net::LDAP::Entry - An LDAP entry object
+
+!!! 個人サイト
+* http://www.knowd.co.jp/yamazaki/?q=node/133
+** Book: Perlを使ったLDAPアクセス -Net::LDAPモジュールの設定
+* http://www007.upp.so-net.ne.jp/kcannex/pn/ldap_perl.html
+** Net::LDAP

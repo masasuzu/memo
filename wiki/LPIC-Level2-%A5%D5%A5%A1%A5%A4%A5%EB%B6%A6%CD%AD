@@ -1,0 +1,70 @@
+! Samba
+*LMHOSTSはNetBIOS名とIPアドレスの対応を記述する
+
+!! 設定
+*ユーザ、パスワード認証する
+**security=user
+* os levelが高いほどマスターブラウザに検出されやすい
+* os level =0 だとマスターブラウザにはならない
+*smb.confの構文チェックコマンド
+** testparm
+
+* passwdファイルの指定
+** smb passwd file = /path/to/smbpasswd
+
+!! コマンド
+
+* smbpasswd
+** -a add
+** -d disable
+** -e enable
+** -x delete
+
+* nmblookup
+** -M マスターブラウザの検索
+** -R 再帰検索
+** -A 引数をIPアドレスとみなして実行
+** -U ユニキャスト問い合わせ
+
+* Samva 3.0系でユーザアカウント作成
+** pdbedit
+
+* 指定ワークグループのマスターブラウザを検索
+** nmblookup -M WORKGROUP
+
+! NFS
+* インストール
+** sudo aptitude install nfs-kernel-server
+
+* 指定ホストで動作しているRPCサービス一覧を表示
+** rpcinfo -p hostname
+
+!! 設定
+* rootユーザでアクセスすると一般ユーザにマッピングされる
+** root_squiash
+
+!! コマンド
+
+* NFSサーバでエクスポートしているディレクトリをマウントする
+** mount [ -t nfs ] nfsserver:/path/to/dir /path/to/mntpoint
+
+* マウント時のマウントオプション
+** soft
+** hard
+** intr Ctrl Cを受け付ける
+
+* 統計情報を出力する
+ %nfsstat
+ Server rpc stats:
+ calls      badcalls   badauth    badclnt    xdrcall
+ 1          0          0          0          0
+ 
+ Server nfs v3:
+ null         getattr      setattr      lookup       access       readlink
+ 1       100% 0         0% 0         0% 0         0% 0         0% 0         0%
+ read         write        create       mkdir        symlink      mknod
+ 0         0% 0         0% 0         0% 0         0% 0         0% 0         0%
+ remove       rmdir        rename       link         readdir      readdirplus
+ 0         0% 0         0% 0         0% 0         0% 0         0% 0         0%
+ fsstat       fsinfo       pathconf     commit
+ 0         0% 0         0% 0         0% 0         0%

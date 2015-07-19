@@ -1,0 +1,170 @@
+! システムの起動プロセス
+
+* システム起動時に渡されたパラメータは/proc/cmdlineに格納される
+
+masasuzu@henry% cat /proc/cmdline                                                               [~]
+ BOOT_IMAGE=/boot/vmlinuz-2.6.35-25-generic root=UUID=7bdb89ba-170b-4526-b8c2-ec404a95bdd2 ro quiet splash
+
+
+* シングルユーザモード
+** linux 0
+** linux s
+** linux S
+** linux single
+
+!! initプロセス
+* システム起動時に一番最初に実行されるプロセス。
+* プロセスIDは1
+
+initが実行されるまでの流れ
+# 電源オン
+# BIOSがシステムを初期化しブートローダを起動
+# ブートローダがLinuxカーネルを起動
+# ブートローダがinitプロセスを起動
+
+ masasuzu@henry% dmesg | head -10                                                                [~]
+ [    0.000000] Initializing cgroup subsys cpuset
+ [    0.000000] Initializing cgroup subsys cpu
+ [    0.000000] Linux version 2.6.35-25-generic (buildd@crested) (gcc version 4.4.5 (Ubuntu/Linaro 4.4.4-14ubuntu5) ) #44-Ubuntu SMP Fri Jan 21 17:40:44 UTC 2011 (Ubuntu 2.6.35-25.44-generic 2.6.35.10)
+ [    0.000000] Command line: BOOT_IMAGE=/boot/vmlinuz-2.6.35-25-generic root=UUID=7bdb89ba-170b-4526-b8c2-ec404a95bdd2 ro quiet splash
+ [    0.000000] BIOS-provided physical RAM map:
+ [    0.000000]  BIOS-e820: 0000000000000000 - 000000000009e800 (usable)
+ [    0.000000]  BIOS-e820: 000000000009f800 - 00000000000a0000 (reserved)
+ [    0.000000]  BIOS-e820: 00000000000f0000 - 0000000000100000 (reserved)
+ [    0.000000]  BIOS-e820: 0000000000100000 - 00000000dfee0000 (usable)
+ [    0.000000]  BIOS-e820: 00000000dfee0000 - 00000000dfee3000 (ACPI NVS)
+
+!! /etc/inittab
+!!! 書式
+ ID:[run-level]:action-descripter::[exec-pocess [args]]
+
+ masasuzu@lenny% cat /etc/inittab
+ # /etc/inittab: init(8) configuration.
+ # $Id: inittab,v 1.91 2002/01/25 13:35:21 miquels Exp $
+ 
+ # The default runlevel.
+ id:2:initdefault:
+ 
+ # Boot-time system configuration/initialization script.
+ # This is run first except when booting in emergency (-b) mode.
+ si::sysinit:/etc/init.d/rcS
+ 
+ # What to do in single-user mode.
+ ~~:S:wait:/sbin/sulogin
+ 
+ # /etc/init.d executes the S and K scripts upon change
+ # of runlevel.
+ #
+ # Runlevel 0 is halt.
+ # Runlevel 1 is single-user.
+ # Runlevels 2-5 are multi-user.
+ # Runlevel 6 is reboot.
+ 
+ l0:0:wait:/etc/init.d/rc 0
+ l1:1:wait:/etc/init.d/rc 1
+ l2:2:wait:/etc/init.d/rc 2
+ l3:3:wait:/etc/init.d/rc 3
+ l4:4:wait:/etc/init.d/rc 4
+ l5:5:wait:/etc/init.d/rc 5
+ l6:6:wait:/etc/init.d/rc 6
+ # Normally not reached, but fallthrough in case of emergency.
+ z6:6:respawn:/sbin/sulogin
+ 
+ # What to do when CTRL-ALT-DEL is pressed.
+ ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now
+ 
+ # What to do when the power fails/returns.
+ pf::powerwait:/etc/init.d/powerfail start
+ pn::powerfailnow:/etc/init.d/powerfail now
+ po::powerokwait:/etc/init.d/powerfail stop
+ 
+ # Format:
+ #  <id>:<runlevels>:<action>:<process>
+ #
+ 
+ 1:2345:respawn:/sbin/getty 38400 tty1
+ 2:23:respawn:/sbin/getty 38400 tty2
+ 3:23:respawn:/sbin/getty 38400 tty3
+ 4:23:respawn:/sbin/getty 38400 tty4
+ 5:23:respawn:/sbin/getty 38400 tty5
+ 6:23:respawn:/sbin/getty 38400 tty6
+
+
+!! システム起動スクリプト
+* redhat
+** /etc/rd.d/rc*.d
+* debian
+** /etc/rc+.d
+
+!! サービスの自動起動
+
+!!! chkconfig
+
+ chkconfig [option] [service-name] [on|off]
+
+ex)
+ chkconfig httpd off
+ chkconfig httpd on
+ chkconfig --level 235 httpd on
+
+||!オプション ||! 説明 ||
+|| --list || 自動起動の設定をランレベルごとに表示 ||
+|| --level || ランレベルの指定 ||
+|| --add || サービスの追加 ||
+|| --del || サービスの削除 ||
+
+!!! update-rc.d
+
+ updaste-rc.d [option] service-name [remove]
+ updaste-rc.d [option] service-name [defaults: [NN |sNN kNN]
+ updaste-rc.d [option] service-name start | stop NN run-level
+
+||!オプション ||! 説明 ||
+|| -n || 表示するだけでなにもしない||
+|| -f || 強制的にシンボリックリンクを作成 ||
+|| remove || 削除 ||
+|| defaults || デフォルトのスクリプトを作成||
+|| start || 起動スクリプトを作成 ||
+|| stop || 停止スクリプトを作成 ||
+|| NN || 優先順位 ||
+
+* defaultsを指定した場合、2,3,4,5に起動スクリプト、0,1,6に停止スクリプトが作成される。
+
+! ブートローダ
+!! GRUB
+* /boot/grub/menu.lst
+* /boot/grub/grub.conf
+
+*ルートパティションの指定 /dev/sdaの場合
+** root (hd0,0)
+
+
+!!! 設定パラメータ
+:default: デフォルトで起動するエントリ番号
+:timeout: メニューを表示している秒数
+:splashimage: メニューの背景
+:title: メニュータイトル
+:root: カーネルが存在するパーティション
+:initrd: 初期RAMディスクファイル
+:makeactive: ルートパティションのアクティブ化
+:hiddenmenu: システム起動時に選択メニューを表示しない
+:kernerl: カーネルイメージとカーネルオプションの指定
+
+!!! grubシェルコマンド
+:dhcp:
+:ifconfig:
+:parttype: パーティションタイプの変更
+:serial:
+:setkey: キーマップの設定
+:boot: OSの起動
+:configfile:設定ファイルの読み込み
+:initrd:初期ラムディスクを読み込む
+:root:rootデバイスの設定
+
+!! LILO
+* 設定ファイル
+** /etc/lilo.conf
+* 設定変更時には /etc/liloをたたく
+
+* LILOをMBRから削除したい
+**/sbin/lilo -u

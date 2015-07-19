@@ -1,0 +1,57 @@
+{{toc}}
+
+
+! ErtherChannel
+* ポートのデュプレックスモードの一致
+* ポート速度の一致
+* ポートのVLANの一致
+* トランキングモードの一致
+* ポートの種類の一致
+
+* 障碍発生時、数ミリ秒でリルート
+
+: PAgP:
+:: 最大8ポートをアクティブにバンドルできる
+:: Cisco独自のプロトコル
+:: auto desireble
+ channel-group 1 mode auto
+ channel-group 1 mode desireble
+
+: LACP:
+:: 標準で非Ciscoデバイスとの接続が可能
+:: アクティブモードとスタンバイモードのインターフェースが定義できる
+:: passive active
+ channel-group 1 mode passive
+ channel-group 1 mode active
+
+!! EtherChannelの設定
+* IFにグループの設定
+ (config-if)#channel-group グループ番号 mode モード
+
+!! EtherChannelモード
+* active
+** 無条件でLACPを有効にする
+ Enable LACP unconditionally
+
+* auto
+** PAgPデバイスが検出された場合のみPagPを有効にする
+ Enable PAgP only if a PAgP device is detected
+
+* desirable
+** 無条件にPAgPを有効にする
+ Enable PAgP unconditionally
+* on
+** EtherChannelのみを有効にする
+ Enable Etherchannel only
+
+* passive
+** LACPデバイスが検出された場合のみ、LACPを有効にする
+ Enable LACP only if a LACP device is detected
+
+!! EtherChannelモードの組み合わせ
+||! モード     ||! on ||! auto(PAgP) ||! disirable(PAgP) ||! passive(LACP) ||! active(LACP) ||
+||! on         || ○  || ×  || ×  || ×  || ×  ||
+||! auto       || ×  || ×  || ○  || ×  || ×  ||
+||! desirable  || ×  || ○  || ○  || ×  || ×  ||
+||! passive    || ×  || ×  || ×  || ×  || ○  ||
+||! active     || ×  || ×  || ×  || ○  || ○  ||

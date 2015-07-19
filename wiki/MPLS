@@ -1,0 +1,34 @@
+! MPLS-DS-TE
+
+!! プール
+* global-pool
+** BC0 
+** regular bandwidth
+* sub-pool
+** BC1
+** global-poolの一部
+
+!! 帯域予約のモデル
+* Russian Doll Model
+** 全てのクラスの品質低下を防ぐことができる。
+** 優先度を与えることができる。
+* Maximum Allocation Model
+** 優先度を使用することなく全てのクラスタイプを隔離することができる
+** プレミアムクラス以外のクラスの品質低下させる余裕がある場合に使用
+
+!! DS-TEのモード
+* Tradditional
+* Migration
+* Liberal IETF
+
+
+!! DS-TEの利点
+
+
+!! DS-TEの設定
+
+!! 関連RFC
+* Multi-Protocol Label Switching (MPLS) Support of Differentiated Services by F. Le Faucheur, L.Wu, B. Davie, P. Vaananen, R. Krishnan, P. Cheval, & J. Heinanen (RFC 3270)
+*  Protocol Extensions for Support of Diffserv-aware MPLS Traffic Engineering ed. by F. Le Faucheur(RFC 4124)
+*  Russian Dolls Bandwidth Constraints Model for Diffserv-aware MPLS Traffic Engineering ed. by F. Le Faucheur (RFC 4127)
+* Maximum Allocation Bandwidth Constraints Model for Diffserv-aware MPLS Traffic Engineering by F. Le Faucheur & W. Lai (RFC 4125).
